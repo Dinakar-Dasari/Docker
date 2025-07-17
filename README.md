@@ -19,6 +19,7 @@ docker run my-image
 + **_runtime commands: RUN, ENTRYPOINT_**
 + The container uses the pre-installed software and files from the image. No installation steps from the Dockerfile are repeated unless explicitly triggered by a command (e.g., CMD or ENTRYPOINT) that runs when the container starts.
 + In this stage it only does actions which are instructed with **_CMD_** or **_ENTRYPOINT_** commands mentioned in the docker file. These comamnds runs evrytime when container starts. So, installations are mentioed in Dockerfile’s RUN command during the build.
++ **_Each docker run creates a new container even if the image is same_**
 
 
 
