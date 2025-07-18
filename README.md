@@ -87,16 +87,32 @@ docker run my-image
   ```
   docker build -t <docker_file> <directory_of_docker_file>
   ```
-+ ## _RUN vs CMD_ ##
-    ## RUN: ##
+## _RUN vs CMD_ ##
+  ## RUN: ##
   + RUN command will execute when image is created
   + we use this to run any commands in the container like installing any packages, commands, etc.
   + We can have any number of RUN commands in the docker file.
   ## CMD: ##
   + CMD comamnd will execute during container creation
   + The arguments which are in CMD commands will be executed as soon as the container starts by default
-  + There can only be one CMD instruction in a Dockerfile. If you list more than one CMD, only the last one takes effect. 
-  
+  + There can only be one CMD instruction in a Dockerfile. If you list more than one CMD, only the last one takes effect.
+## _COPY:_ ##
+  +  It is used to copy any files & directories from local path to the image
+     ```
+     COPY <source> <destination>
+     ```
+## _ADD:_ ##
+  + Add also does copy of files/diectories from source to destination simiarly like COPy. But it has two more additional          features,
+     1. It can download any files from the internet. We need to give read permission for the index.html
+       ```
+          ADD https://raw.githubusercontent.com/daws-84s/roboshop-docker/refs/heads/main/cart/Dockerfile /usr/share/nginx/html/index.html
+       ```
+     3. It can directly `untar` the files into the container
+        ```
+         ADD file.tar /tmp/folder
+         ```
+
+
 
 
 
