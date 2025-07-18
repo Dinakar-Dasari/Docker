@@ -113,15 +113,15 @@ docker run my-image
   + There can only be one CMD instruction in a Dockerfile. If you list more than one CMD, only the last one takes effect.
 ## _ENTRYPOINT:_ ##
 + It's a command which executes during runtime of the container.
-+ It's similar to the CMD command. But difference is CMD comamnd can be replaced/overriden with CLI but ENTRYPOINT command cannot be replaced.
++ It's similar to the CMD command. But difference is CMD comamnd can be replaced/overriden with CLI but ENTRYPOINT command cannot be replaced/overridden.
 + Instead CLI command gets appended to the ENTRYPOINT command.
 + Let's say you gave **_CMD ["sleep", "10"]:_**
-   + When user gives docker run -d test1:v1. Then it sleeps for 10secs and exits the container.
-   + When he gives docker run -d test1:v1 5. Then it sleeps for 5secs and exits the container.
+   + When user gives **docker run -d test1:v1**. Then it sleeps for 10secs and exits the container.
+   + When he gives **docker run -d test1:v1 sleep 5**. Then it sleeps for 5secs and exits the container.
    + So, CMD is an replacable container and if he gives some random command in CLI then container throws an error.
 + Let's say you gave as **_ENTRYPOINT ["sleep", "10"]:_** 
-    + When user  gives docker run -d test1:v1. Then it sleeps for 10secs and exits the container.
-    + When he gives docker run -d test1:v1 5. Then container appends it like sleep 10 5 & throws an error.
+    + When user  gives **docker run -d test1:v1**. Then it sleeps for 10secs and exits the container.
+    + When he gives **docker run -d test1:v1 sleep 5**. Then container appends it like sleep 10 sleep 5 & throws an error.
     + Since, it's doesn't replace the command with CLI command. So, it's more robust & best for security.
  + **Combination of CMD & ENTRYPOINT**:
    + We can use combination of both like for a flexible execution.
@@ -151,9 +151,50 @@ docker run my-image
   + It is like documentation between the person who builds the image and the person who runs the container, about which           ports are intended to be published. It doesn't do anything. Just for documentation purpose.
        ```
       EXPOSE 80
-       ```     
-
-
+       ```
+ ## _USER:_ ##
+  + By default when we create an container it will do all the actions as a root user. Which is risky
+  + You can check by login into the container you can see as (#)
+  + So, we need to use normal user. After container is created. Now, all operations are runned as test user
+    ```
+    USER test
+    ``` 
+## _WORKDIR:_ ##
+  + We cannot `cd` in container. So, we need to use **WORKDIR /tmp**. It will go to temp directory.
+     ```
+    WORKDIR /tmp
+     ```
+## _ENV:_ ##
++ The ENV instruction sets the environment variable <key> to the value <value>
+    ```
+    ENV COURSE="docker"
+  ```
+ + The ENC variable persists in container also
+## _ARG:_ ##
+ + It's similar to ENV but it's scope is only during building of an image. Cannot be accessed inside container.
+ + Usually the first command in the docker file is FROM command but ARG can be placed in line1. But after from instruction we    cannot use that variable.
+    ```
+   ARG user1=someuser
+    ```
+  + It can also pass during build like
+    ```
+    docker build -t test2:v1 --build-arg user1=rocky .
+    ```
+  + How can you access the ARG variable insider container also?
+     + By assigning the ARG value to the ENV value with the same key. Like
+     ```
+        ARG username = "rocky"
+        ENV username = ${username}
+       ```
+   + ## _ONBUILD:_ ##
+     + When we write a docker file to create an image we use ONBUILD command.
+     + It's applicable when any other user uses the image built from this dockerfile.
+     + The ONBUILD command is not executed when this docker file is build.
+     + For example, if user A writes this docker file and created an image, then the onbuild command is not executed for this        userA when image was built. When person B used the image file created by person A then ONBUILD get activates.
+        ```
+       ONBUILD COPY index.html /usr/share/nginx/html/index.html
+        ```    
+    
 
 
 
