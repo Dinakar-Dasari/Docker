@@ -69,11 +69,11 @@ docker run my-image
   docker run -d -p 8080:80 <container_id>
   ```
   
-+ to access or get into the running container use bash/shell based on the os
++ to access or login into the running container use bash/shell based on the os
   ```
   docker exec -it <container_id> bash/shell
   ```
-+ To get the detailed information about the images, container, volume & other resources,  we use docker inspect command. It      provided low level details and This command is particularly useful for troubleshooting and understanding the configuration     of Docker environments
++ To get the detailed information about the images, ip address, container, volume & other resources,  we use docker inspect command. It provided low level details and This command is particularly useful for troubleshooting and understanding the configuration of Docker environments
     ```
     docker inspect <id/name>
     ```
