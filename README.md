@@ -61,7 +61,10 @@ docker run my-image
    ```
    docker run -d <image_name:tag>
    ```
-+ By default container ports are not exposed to public, for eg: an app server is hosted in a container. usually public cannot    see it. For that purpose, we Maps host port to container port. Host port should be free, means no other service should run     on it. FOr example if you mapped on 8080, when you type <pc_ip>:8080 then can see the content present in the container
++ Docker containers are isolated from the host system, including their network stack. When a container runs a service like Nginx on port 80 inside the container, this port is not automatically accessible from the host or external network. If you try to access localhost:80 on the host, you'll get an error (e.g., "connection refused") because the host's port 80 is not linked to the container's port 80.
++ We use **_port binding_** concept to tackle this issue, Port binding is the process of mapping a port on the host to a port inside the container. This is done using the -p (or --publish) flag in the docker run command.
++ After running the above command, if port 8080 on the host is free, Docker binds the host's port 8080 to the container's port 80.
++ Now, when you access localhost:8080 (or 127.0.0.1:8080) from the host, the request is forwarded to port 80 inside the container, where Nginx is listening, and you'll see the Nginx home page.
   ```
   docker run -d -p 8080:80 <container_id>
   ```
