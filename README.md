@@ -176,6 +176,7 @@ docker run my-image
 ## _ARG:_ ##
  + It's similar to ENV but it's scope is only during building of an image. Cannot be accessed inside container.
  + Usually the first command in the docker file is FROM command but ARG can be placed in line1. But after from instruction we    cannot use that variable.
+ + In an exceptional case ARG can be the first instruction to supply version to base OS in FROM, you cant use that version after FROM instruction
     ```
    ARG user1=someuser
     ```
