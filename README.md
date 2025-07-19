@@ -189,15 +189,15 @@ docker run my-image
         ARG username = "rocky"
         ENV username = ${username}
        ```
-   + ## _ONBUILD:_ ##
-     + When we write a docker file to create an image we use ONBUILD command.
-     + It's applicable when any other user uses the image built from this dockerfile.
-     + The ONBUILD command is not executed when this docker file is build.
-     + For example, if user A writes this docker file and created an image, then the onbuild command is not executed for this        userA when image was built. When person B used the image file created by person A then ONBUILD get activates.
-        ```
-       ONBUILD COPY index.html /usr/share/nginx/html/index.html
-        ```    
-    
+## _ONBUILD:_ ##
+   + When we write a docker file to create an image we use ONBUILD command.
+   + It's applicable when any other user uses the image built from this dockerfile.
+   + The ONBUILD command is not executed when this docker file is build.
+   + For example, if user A writes this docker file and created an image, then the onbuild command is not executed for this        userA when image was built. When person B used the image file created by person A then ONBUILD get activates.
+      ```
+     ONBUILD COPY index.html /usr/share/nginx/html/index.html
+      ```    
+  
 
 
 
