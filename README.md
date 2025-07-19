@@ -77,6 +77,10 @@ docker run my-image
     ```
     docker inspect <id/name>
     ```
++ **_To get the ip address of a container:_** This gives complete information about a container
+  ```
+  docker inspect <container ID>
+  ```
 + To list all the ***_running container_***
    ```
   docker ps
