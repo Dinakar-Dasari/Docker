@@ -2,7 +2,7 @@
  By default When Docker is installed, it automatically creates three default networks:
  + Default bridge network
  + Host network
- + None network
+ + Null network
 + We can see the network list in the docker using **_`docker network ls`_**
 ```
 docker network ls
@@ -28,8 +28,8 @@ ff7f2f1b7695   none      null      local
    + Since, it's using host network. There is no isolation between the container and the Docker host.
    + Running a web server container on port 8080 will make the server immediately accessible on the host’s port 8080 without any additional port mapping. Unlike the bridge network where we need to map the host port to container port
    + The drawback is multiple containers cannot simultaneously use the same port on the host. As that port is already occupied by another service.
-### _None Network:_ ##
-   + The none network disconnects the container from any networking, ensuring complete isolation from external networks and other containers.
+### _Null Network:_ ##
+   + The null network disconnects the container from any networking, ensuring complete isolation from external networks and other containers.
    + We use this when we want our container cannot be accessed by any other network.
    + We rarely use this network, Used for testing, security isolation, or compute-only jobs that require no network connectivity at all.
 ## _User defined network:_ ##
