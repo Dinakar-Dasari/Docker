@@ -1,4 +1,4 @@
-FROM python:3.9.23-alpine3.22
+FROM python:3.9
 WORKDIR /opt/server
 COPY requirements.txt .
 COPY payment.ini .
