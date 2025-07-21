@@ -1,0 +1,68 @@
+-- networks:
+    default:
+      name: "project"
+      driver: bridge
+      # external: true   ## used when we already have an existing network
+
+-- services:
+    mongodb:
+      image: mongodb:v1
+      container_names: mongodb
+
+    catalogue:
+      image: catalogue:v1
+      container_names: catalogue
+      depends_on:
+        - mongodb
+
+    redis:
+      image: redis:7.0
+      container_names: redis
+          
+    cart:
+      image: cart:v1
+      container_names: cart
+      depends_on:
+        - catalogue
+        - redis
+
+    mysql:
+      image: mysql:v1
+      container_names: mysql
+
+    shipping:
+      image: shipping:v1
+      container_names: shipping
+      depends_on: 
+        - mysql
+        - cart
+
+    rabbitmq:
+      image: rabbitmq:v1
+      container_names: rabbitmq
+      environment:                  ## either we can define in the dockerfile or docker compose file
+        RABBITMQ_DEFAULT_USER: roboshop
+        RABBITMQ_DEFAULT_PASS: roboshop123 
+
+    payment:
+      image: payment:v1
+      container_names: payment
+      environment:
+        AMQP_USER: roboshop
+        AMQP_PASS: roboshop123      
+      depends_on:
+         - rabbitmq
+         - cart
+         - user    
+
+    frontend:
+      image: frontend:v1
+      container_names: frontend
+      port:
+       - 80:80
+      depends_on:
+      - catalogue
+      - cart
+      - user
+      - shipping
+      - payment             
