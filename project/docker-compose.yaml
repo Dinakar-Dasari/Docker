@@ -1,10 +1,10 @@
--- networks:
+  networks:
     default:
       name: "project"
       driver: bridge
       # external: true   ## used when we already have an existing network
 
--- services:
+  services:
     mongodb:
       image: mongodb:v1
       container_names: mongodb
