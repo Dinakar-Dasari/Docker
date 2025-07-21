@@ -7,46 +7,46 @@
   services:
     mongodb:
       image: mongodb:v1
-      container_names: mongodb
+      container_name: mongodb
 
     catalogue:
       image: catalogue:v1
-      container_names: catalogue
+      container_name: catalogue
       depends_on:
         - mongodb
 
     redis:
       image: redis:7.0
-      container_names: redis
+      container_name: redis
           
     cart:
       image: cart:v1
-      container_names: cart
+      container_name: cart
       depends_on:
         - catalogue
         - redis
 
     mysql:
       image: mysql:v1
-      container_names: mysql
+      container_name: mysql
 
     shipping:
       image: shipping:v1
-      container_names: shipping
+      container_name: shipping
       depends_on: 
         - mysql
         - cart
 
     rabbitmq:
       image: rabbitmq:v1
-      container_names: rabbitmq
+      container_name: rabbitmq
       environment:                  ## either we can define in the dockerfile or docker compose file
         RABBITMQ_DEFAULT_USER: roboshop
         RABBITMQ_DEFAULT_PASS: roboshop123 
 
     payment:
       image: payment:v1
-      container_names: payment
+      container_name: payment
       environment:
         AMQP_USER: roboshop
         AMQP_PASS: roboshop123      
@@ -57,7 +57,7 @@
 
     frontend:
       image: frontend:v1
-      container_names: frontend
+      container_name: frontend
       port:
        - 80:80
       depends_on:
