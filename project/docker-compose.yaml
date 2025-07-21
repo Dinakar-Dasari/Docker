@@ -25,7 +25,13 @@
       depends_on:
         - catalogue
         - redis
-
+    user:
+      image: user:v1
+      container_name: user
+      depends_on:
+        - redis
+        - mongodb
+        
     mysql:
       image: mysql:v1
       container_name: mysql
