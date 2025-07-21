@@ -31,7 +31,7 @@
       depends_on:
         - redis
         - mongodb
-        
+
     mysql:
       image: mysql:v1
       container_name: mysql
@@ -44,7 +44,7 @@
         - cart
 
     rabbitmq:
-      image: rabbitmq:v1
+      image: rabbitmq:3
       container_name: rabbitmq
       environment:                  ## either we can define in the dockerfile or docker compose file
         RABBITMQ_DEFAULT_USER: roboshop
